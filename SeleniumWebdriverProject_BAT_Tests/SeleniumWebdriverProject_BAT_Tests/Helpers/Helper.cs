@@ -36,6 +36,12 @@ namespace SeleniumWebdriverProject_BAT_Tests.Helpers
 
                     break;
 
+                case "phantomjs":
+
+                    capability = DesiredCapabilities.PhantomJS();
+
+                    break;
+
                 case "chrome":
 
                     capability = DesiredCapabilities.Chrome();
