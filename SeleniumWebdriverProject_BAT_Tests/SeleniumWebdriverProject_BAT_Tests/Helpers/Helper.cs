@@ -12,14 +12,12 @@ namespace SeleniumWebdriverProject_BAT_Tests.Helpers
         public  IWebDriver Driver;
         public string BaseUrl;
         
-        public string Browser;
-        
 
-        public Helper()
+        public Helper(string browser)
         {
             BaseUrl = ConfigurationManager.AppSettings["BaseUrl"];
-            Browser = ConfigurationManager.AppSettings["Browser"];
-            GetDriver(Browser);
+            
+            GetDriver(browser);
         }
  
      

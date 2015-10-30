@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Threading;
 //using NUnit.Framework;
 using OpenQA.Selenium;
@@ -14,16 +16,33 @@ namespace SeleniumWebdriverProject_BAT_Tests.Tests
     {
         private IWebDriver _driver;
         private Helper helper;
+        private static string[] browsers = ConfigurationManager.AppSettings["Browsers"].Split(',');
+        private string browser;
+
+        public static IEnumerable<string> GetBrowser
+        {
+            get
+            {
+                foreach (var selectedBrowser in browsers)
+                {
+                    yield return selectedBrowser;
+                }
+            }
+        }
         
+        [Factory("GetBrowser")]
+        public HomePage(string browser)
+        {
+            this.browser = browser;
+        }
         
         [SetUp]
         public void Setup()
         {
             
-            helper = new Helper();
+            helper = new Helper(browser);
             _driver = helper.Driver;
         }
-
         
         [Test]
         public void HomePage_Hero()
